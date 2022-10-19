@@ -1,24 +1,23 @@
 import Vue from 'vue'
 import App from './App.vue'
+// 导入vantui 
+import './vantui.js'
+// 导入规范化样式 
+import './assets/css/normalize.css'
+import './assets/css/common.scss'
+// 进度条样式
+import '../node_modules/nprogress/nprogress.css'
+
+//复制包
+import VueClipboard from 'vue-clipboard2'
+
+Vue.use(VueClipboard)
+// 导入工具函数
+import './utils/index.js'
+//导入vue router
 import router from './router/index.js'
-import store from './store/index'
-import './style.css'
+import store from './store/index.js'
 
-// 编写vue插件(指令,过滤器,原型,组件)
-Vue.use({
-  install(vue) {
-    console.log('install插件');
-    Vue.prototype.$title='hello'
-    Vue.component('my-button',{
-      template:`<button>button</button>`
-    })
-    Vue.filter('dateFormat')
-  }
-})
-
-Vue.use(function(Vue){
- console.log('install插件2');
-})
 
 new Vue({
   store,

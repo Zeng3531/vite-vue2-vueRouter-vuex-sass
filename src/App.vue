@@ -1,25 +1,48 @@
 <template>
-    <div class="app">
-        <h1>hello vue2+vite</h1>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link> |
-        <router-link to="/test">test</router-link>
-        <router-view />
-    </div>
+  <div id="app">
+    <van-nav-bar :title="title" left-text="返回" left-arrow @click-left="$router.back()" v-show='isShowNarbar' />
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </div>
 </template>
 
 <script>
-    export default {
-        
+import { Toast } from 'vant';
+export default {
+  data() {
+    return {
+      isShowNarbar: false,
+      title: '易购!'
+
     }
+  },
+
+
+  watch: {
+    '$route': {
+      handler: function (newRoute, oldRoute) {
+        // 是主頁就隱藏narbar 
+        let { isMainPage, title } = newRoute.meta
+        this.title = title
+        if (isMainPage == true) {
+          this.isShowNarbar = false
+        } else {
+          this.isShowNarbar = true
+        }
+      }
+    },
+    immediate: true
+  },
+}
 </script>
 <style lang="scss">
-    .App {
-        ul {
-            li {
-                list-style: none;
-            }
-        }
-    }
+@import url(./assets/css/common.scss);
+
+#app {
+  min-width: 320px;
+  max-width: 750px;
+  margin: 0 auto;
+}
 </style>
 
